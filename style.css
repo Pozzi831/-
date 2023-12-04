@@ -67,17 +67,6 @@ nav {
 	float: right;
 }
 
-body::-webkit-scrollbar {
-	width: 10px;               /* ширина scrollbar */
-  }
-  body::-webkit-scrollbar-track {
-	background: rgb(255, 255, 255);        /* цвет дорожки */
-  }
-  body::-webkit-scrollbar-thumb {
-	background-color: rgb(255, 0, 0);    /* цвет плашки */
-	border-radius: 20px;       /* закругления плашки */
-	border: 3px solid rgb(0, 0, 0);  /* padding вокруг плашки
-
 
 .menu {
 	padding: 0;
@@ -225,6 +214,17 @@ p {
 .services_item:nth-child(2) {margin-left: 60px;}
 
 #services {padding-bottom: 140px;}
+
+body::-webkit-scrollbar {
+	width: 10px;               /* ширина scrollbar */
+  }
+  body::-webkit-scrollbar-track {
+	background: rgb(255, 255, 255);        /* цвет дорожки */
+  }
+  body::-webkit-scrollbar-thumb {
+	background-color: rgb(255, 0, 0);    /* цвет плашки */
+	border-radius: 20px;       /* закругления плашки */
+	border: 3px solid rgb(0, 0, 0);  /* padding вокруг плашки
 
 .works {margin-top: 70px;}
 
