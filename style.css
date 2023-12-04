@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
 a{text-decoration: none;}
 
 header {
-	height: 60vh;
+	height: 63vh;
 	background: url(images/bg.jpg) no-repeat center top / cover;
 }
 
