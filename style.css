@@ -43,6 +43,18 @@ body{
 	font-family: Arial, sans-serif;
 }
 
+body::-webkit-scrollbar {
+	width: 12px;               /* ширина scrollbar */
+  }
+  body::-webkit-scrollbar-track {
+	background: rgb(255, 255, 255);        /* цвет дорожки */
+  }
+  body::-webkit-scrollbar-thumb {
+	background-color: rgb(135, 0, 0);    /* цвет плашки */
+	border-radius: 35px;       /* закругления плашки */
+	border: 3px solid rgb(0, 0, 0);  /* padding вокруг плашки */
+  }
+
 a{text-decoration: none;}
 
 header {
