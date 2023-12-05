@@ -28,7 +28,7 @@
 .header{
 	padding: 0 90px;
 	display: none;
-	opacity: 85%;
+	opacity: 100%;
 	z-index: 9999;
 	height: 125px;
 	top: -25px;
