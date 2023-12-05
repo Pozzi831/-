@@ -46,7 +46,7 @@ body{
 a{text-decoration: none;}
 
 header {
-	height: 76vh;
+	height: 100vh;
 	background: url(images/bg.jpg) no-repeat center top / cover;
 }
 
