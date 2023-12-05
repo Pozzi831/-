@@ -265,7 +265,7 @@ footer {
 footer a{color: #777;}
 
 @media screen and (min-width: 320px) and (max-width: 480px){ header {
-	height: 100vh;
+	height: 50vh;
 }    
 }
 
