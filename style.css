@@ -28,7 +28,7 @@
 .header{
 	padding: 0 90px;
 	display: none;
-	opacity: 100%;
+	opacity: 85%;
 	z-index: 9999;
 	height: 125px;
 	top: -25px;
@@ -46,7 +46,7 @@ body{
 a{text-decoration: none;}
 
 header {
-	height: 100vh;
+	height: 75vh;
 	background: url(images/bg.jpg) no-repeat center top / cover;
 }
 
