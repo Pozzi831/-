@@ -272,7 +272,7 @@ footer a{color: #777;}
 }    
 }
 
-@media screen and (min-width: 1440px) and (max-width: 1599px){ 
+@media screen and (min-width: 1700px) and (max-width: 1980px){ 
 
 body::-webkit-scrollbar {
   width: 12px;               /* ширина scrollbar */
