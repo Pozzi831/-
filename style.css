@@ -43,17 +43,7 @@ body{
 	font-family: Arial, sans-serif;
 }
 
-body::-webkit-scrollbar {
-  width: 12px;               /* ширина scrollbar */
-}
-body::-webkit-scrollbar-track {
-  background: white;        /* цвет дорожки */
-}
-body::-webkit-scrollbar-thumb {
-  background-color: red;    /* цвет плашки */
-  border-radius: 50px;       /* закругления плашки */
-  border: 3px solid black;  /* padding вокруг плашки */
-}
+
 
 
 a{text-decoration: none;}
@@ -283,6 +273,18 @@ footer a{color: #777;}
 }
 
 @media screen and (min-width: 1440px) and (max-width: 1599px){ 
+
+body::-webkit-scrollbar {
+  width: 12px;               /* ширина scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: white;        /* цвет дорожки */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: red;    /* цвет плашки */
+  border-radius: 50px;       /* закругления плашки */
+  border: 3px solid black;  /* padding вокруг плашки */
+}
 
 }
 
