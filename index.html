@@ -1,179 +1,220 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-   <meta charset="utf-8">
-   <title>Родной язык</title>	
-   <link rel="stylesheet" type="text/css" href="style.css">
-   <link rel="shorttut icon" href="images/logoo.png" type="images/png-icon">
-   <script src="jquery-3.4.1.min.js" type="text/javascript"></script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script>
-$(document).ready(function() { 
-  var button = $('.header'); 
-  $(window).scroll (function () {
-    if ($(this).scrollTop () > 400) {
-      button.fadeIn();
-    } else {
-      button.fadeOut();
-    }
-});     
-});
-</script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование по математике (2 семестр)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f0f2f5; color: #333; line-height: 1.6; }
+        .hidden { display: none !important; }
+        .menu, .result { text-align: center; margin-top: 10vh; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        button { padding: 12px 24px; margin: 10px; font-size: 16px; cursor: pointer; background: #0056b3; color: white; border: none; border-radius: 8px; transition: background 0.3s; }
+        button:hover { background: #004494; }
+        .question-block { background: white; padding: 25px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .question-title { margin-top: 0; font-size: 1.1em; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 15px; }
+        .option { display: block; margin: 10px 0; padding: 10px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+        .option:hover { background: #f8f9fa; }
+        .option input { margin-right: 10px; }
+        .correct { background: #d4edda !important; color: #155724; border: 1px solid #c3e6cb; }
+        .incorrect { background: #f8d7da !important; color: #721c24; border: 1px solid #f5c6cb; }
+        .math { font-style: italic; font-family: "Times New Roman", Times, serif; font-size: 1.1em; }
+        #submit-btn { width: 100%; font-size: 18px; padding: 15px; margin-top: 20px; background: #28a745; }
+        #submit-btn:hover { background: #218838; }
+    </style>
 </head>
 <body>
-	<header>	
-			<div class="header clearfix">	
-		<img src="images/Logo.png" alt="" class="logo">
-		<nav>
-			<ul class="menu">
-			 <li><a href="#service"><strong>Путеводитель</strong></a></li>
-			 <li><a href="#portfolio"><strong>Иллюстрации</strong></a></li>
-			 <li><a href="#abt"><strong>Народы</strong></a></li>
-		    </ul>
-		</nav>
-		</div>
-			<div class="container">
-				
-<div class="header-active">	
-		<img src="images/Logo.png" alt="" class="logo">
-		<nav>
-			<ul class="menu">
-				<li><a href="#service"><strong>Путеводитель</strong></a></li>
-				<li><a href="#portfolio"><strong>Иллюстрации</strong></a></li>
-				<li><a href="#abt"><strong>Народы</strong></a></li>
-		    </ul>
-		</nav>
-		</div>
-			
-		<div class="titles">
-			<div class="titles_first">Родной язык</div>
-			<h1>Татарский язык</h1>
-		</div>
-		<a class="button" href="#footer">Источники</a>
-	</div>
 
-	</header>
-	<a name="service"></a>
-	<section id="services">
-		<div class="container">
-			<div class="title">
-				<h2>Путеводитель</h2>
-				<p>Вот прям всё при всё</p>
-			</div>
-			<div class="services clearfix">
-				<div class="services_item">
-				<h3>История</h3>
-				<p>Современный татарский язык в своём становлении претерпел множество изменений, сформировался из булгарского, кыпчакских и чагатайских диалектов тюркских языков. <a href="2sait.html">Подробнее</a> 
-				</p>
-				</p>
-			    </div>
-			    <div class="services_item">
-				<h3>Письменость</h3>
-				<p>В разное время для татарского языка использовались разные системы письма:<a href="cershet.html">Подробнее</a></p>
-			    </div>
-			    <div class="services_item">
-				<h3>Диалекты</h3>
-				<p>Народно-разговорный татарский язык исследователями делится либо на 3, либо на 5 основных диалектов.<a href="COKOL.html">Подробнее</a></p>
-			    </div>	    
-		    </div>
+    <div id="menu" class="menu">
+        <h2>Выберите режим тестирования</h2>
+        <p>Все правильные ответы автоматически учтены на основе ваших данных.</p>
+        <button onclick="startQuiz('theory')">Теоретическая часть (20 вопросов)</button>
+        <button onclick="startQuiz('practice')">Практическая часть (20 вопросов)</button>
+        <button onclick="startQuiz('mixed')">Всё вместе (40 вопросов)</button>
+    </div>
 
+    <div id="quiz-container" class="hidden">
+        <h2 id="quiz-title" style="text-align: center;"></h2>
+        <div id="questions-area"></div>
+        <button id="submit-btn" onclick="checkAnswers()">Завершить тест и узнать результат</button>
+    </div>
 
-		</div>
-	</section>
-		    
+    <div id="result" class="result hidden">
+        <h2>Результаты теста</h2>
+        <h1 id="score-text" style="color: #0056b3; font-size: 3em; margin: 20px 0;"></h1>
+        <button onclick="location.reload()">Вернуться в главное меню</button>
+    </div>
 
-		</div>
-	</section>
-	<a name="portfoli"></a>
-	<section id="portfolio">
-		<div class="container">
-			<div class="title2">
-				<h2>Иллюстрации</h2>
-			</div>
-			<div class="works clearfix">
-				<img src="images/image.png" alt="" >
-				<img src="images/image1.jpg" alt="">
-				<img src="images/image2.png" alt=""	>
-			</div>
-	</section>
+    <script>
+        const theoryDB = [
+            { q: "Используя логические символы, определение предела числовой последовательности можно записать в виде:", a: ["(&forall;N>0 &exist;a<sub>n</sub>=N(&epsilon;): &forall;n>N &rArr; |a<sub>n</sub> - A| < &epsilon;) &hArr; (lim a<sub>n</sub> = A)", "(&forall;N>0 &exist;&epsilon;=&epsilon;(N): &forall;N>&epsilon; &rArr; |a<sub>n</sub> - A| < &epsilon;) &hArr; (lim a<sub>n</sub> = A)", "(&forall;&epsilon;>0 &exist;N=N(&epsilon;): &forall;n>N &rArr; |a<sub>n</sub> - A| < &epsilon;) &hArr; (lim a<sub>n</sub> = A)", "(&forall;&epsilon;>0 &exist;N=N(&epsilon;): &forall;n>A &rArr; |a<sub>n</sub> - A| < &epsilon;) &hArr; (lim a<sub>n</sub> = A)"], c: 2 },
+            { q: "По определению y есть функция от x, если:", a: ["каждому значению x соответствует одно определенное значение y", "каждому значению x, принадлежащей некоторому множеству, соответствует одно определенное значение y", "каждому значению x соответствуют какие-то значения y", "каждому значению y соответствуют какие-то значения x"], c: 1 },
+            { q: "Функция называется неубывающей на некотором интервале, если для любых двух значений аргумента x<sub>1</sub> и x<sub>2</sub> из этого интервала:", a: ["f(x<sub>2</sub>) &ge; f(x<sub>1</sub>) при x<sub>2</sub> > x<sub>1</sub>", "f(x<sub>2</sub>) > f(x<sub>1</sub>) при x<sub>2</sub> > x<sub>1</sub>", "f(x<sub>2</sub>) &le; f(x<sub>1</sub>) при x<sub>2</sub> > x<sub>1</sub>", "f(x<sub>2</sub>) < f(x<sub>1</sub>) при x<sub>2</sub> > x<sub>1</sub>"], c: 0 },
+            { q: "Используя логические символы, определение предела функции в точке можно записать в виде:", a: ["(&forall;&epsilon;>0 &exist;&delta;>0 &forall;x&ne;x<sub>0</sub>: |x-x<sub>0</sub>|<&delta; &rArr; |f(x)-A|<&epsilon;) &hArr; (lim f(x) = A)", "(&forall;&epsilon;>0 &exist;x=x(&epsilon;)...)", "(&forall;&epsilon;>0 &exist;&delta;>0 &forall;x: |x-x<sub>0</sub>|<&delta; &rArr; |f(x)-A|>&epsilon;)", "(&forall;&epsilon;>0 &exist;&delta;=0 &forall;x: |x-x<sub>0</sub>|<&delta; &rArr; |f(x)-A|<&epsilon;)"], c: 0 },
+            { q: "Бесконечно малые функции &alpha; и &beta; называются бесконечно малыми одного порядка, если:", a: ["lim (&alpha;/&beta;) = 0", "lim (&alpha;/&beta;) = &infin;", "lim (&alpha;/&beta;) не существует", "lim (&alpha;/&beta;) = A &ne; 0"], c: 3 },
+            { q: "Производной функции y = f(x) в точке x<sub>0</sub> называется:", a: ["lim (f(x)/x)", "lim (f(x<sub>0</sub>)/(x-x<sub>0</sub>))", "lim (&Delta;f / &Delta;x)", "lim<sub>&Delta;x&rarr;0</sub> (f(x<sub>0</sub>+&Delta;x) - f(x<sub>0</sub>)) / &Delta;x"], c: 3 },
+            { q: "Производная f'(x) в точке x есть:", a: ["касательная к графику функции в точке x", "угол между касательной и положительным направлением оси Ox", "угол между касательной и отрицательным направлением оси Ox", "угловой коэффициент касательной к графику функции y = f(x) в точке x"], c: 3 },
+            { q: "Уравнение касательной к графику функции y = f(x) в точке M<sub>0</sub>(x<sub>0</sub>; y<sub>0</sub>) имеет вид:", a: ["y - y<sub>0</sub> = -f'(x)(x - x<sub>0</sub>)", "y - y<sub>0</sub> = f'(x<sub>0</sub>)(x - x<sub>0</sub>)", "y = f'(x)(x - x<sub>0</sub>)", "y - y<sub>0</sub> = 1/f'(x) (x - x<sub>0</sub>)"], c: 1 },
+            { q: "Для вычисления приближенных значений функций используется формула:", a: ["f(x+&Delta;x) &asymp; f(x) + f'(x)&middot;&Delta;x", "f(x) &asymp; f(&Delta;x) + f'(x)&middot;&Delta;x", "f(x+&Delta;x) &asymp; f'(x)&middot;&Delta;x", "f(x-&Delta;x) &asymp; f(x) - f'(x)&middot;&Delta;x"], c: 0 },
+            { q: "Окрестностью точки x<sub>0</sub> называется интервал:", a: ["(0; x<sub>0</sub>+&epsilon;)", "(x<sub>0</sub>-&epsilon;; x<sub>0</sub>+&epsilon;)", "(x<sub>0</sub>-&epsilon;; 0)", "(x<sub>0</sub>; x<sub>0</sub>+&epsilon;)"], c: 1 },
+            { q: "Бесконечно малые функции &alpha;(x) и &beta;(x) называются эквивалентными, если:", a: ["lim (&alpha;/&beta;) = 1", "lim (&alpha;/&beta;) = &infin;", "lim (&alpha;/&beta;) = 0", "lim (&alpha;/&beta;) не существует"], c: 0 },
+            { q: "Первый замечательный предел имеет вид:", a: ["lim<sub>x&rarr;0</sub> (sin x / x) = 0", "lim<sub>x&rarr;0</sub> (sin x / x) = 1", "lim<sub>x&rarr;0</sub> (sin x / x) = 2", "lim<sub>x&rarr;0</sub> (sin x / x) = &infin;"], c: 1 },
+            { q: "Второй замечательный предел имеет вид:", a: ["lim<sub>x&rarr;&infin;</sub> (1 + 1/x)<sup>x</sup> = 1", "lim<sub>x&rarr;&infin;</sub> (1 - 1/x)<sup>x</sup> = e", "lim<sub>x&rarr;&infin;</sub> (1 + x)<sup>x</sup> = e", "lim<sub>x&rarr;&infin;</sub> (1 + 1/x)<sup>x</sup> = e"], c: 3 },
+            { q: "Если функция задана параметрически x=x(t), y=y(t), то производная вычисляется по формуле:", a: ["y'<sub>x</sub> = x'<sub>t</sub> / y'<sub>t</sub>", "y'<sub>x</sub> = y'<sub>t</sub> - x'<sub>t</sub>", "y'<sub>x</sub> = y'<sub>t</sub> / x'<sub>t</sub>", "y'<sub>x</sub> = y<sub>t</sub> / x<sub>t</sub>"], c: 2 },
+            { q: "По правилу Лопиталя предел отношения функций равен:", a: ["lim (f(x)/g(x)) = lim (g'(x)/f'(x))", "lim (f(x)/g(x)) = lim (f'(x) - g'(x))", "lim (f(x)/g(x)) = lim (f'(x) &middot; g'(x))", "lim (f(x)/g(x)) = lim (f'(x)/g'(x))"], c: 3 },
+            { q: "Если при переходе через критическую точку производная меняет знак с минуса на плюс, то это точка:", a: ["максимума", "минимума", "перегиба", "отрицания"], c: 1 },
+            { q: "Если при переходе через критическую точку производная меняет знак с плюса на минус, то это точка:", a: ["максимума", "минимума", "перегиба", "отрицания"], c: 0 },
+            { q: "Функция F(x) называется первообразной функции f(x), если выполняется равенство:", a: ["F'(x) = f'(x)", "&int;F(x)dx = f(x)", "F'(x) = f(x)", "F(x) = f'(x)"], c: 2 },
+            { q: "Совокупность всех первообразных F(x)+C от функции f(x) называется:", a: ["дифференциалом", "определенным интегралом", "неопределенным интегралом", "производной"], c: 2 },
+            { q: "Производная неопределенного интеграла (&int;f(x)dx)' равна:", a: ["f(x)", "f(x)dx", "f'(x)", "&int;f(x)dx"], c: 0 },
+            { q: "Пусть a - постоянная величина, тогда &int;a f(x)dx равен:", a: ["a<sup>2</sup> &int;f(x)dx", "a &middot; f(x)", "a &int;f(x)dx", "a + &int;f(x)dx"], c: 2 },
+            { q: "Неопределенный интеграл от алгебраической суммы функций &int;(f(x) &plusmn; g(x))dx равен:", a: ["&int;f(x)&middot;g(x)dx", "&int;f(x)dx &plusmn; &int;g(x)dx", "&int;(f(x)+g(x))dx", "&int;f(x)dx - &int;g(x)dx"], c: 1 },
+            { q: "Формула замены переменных в неопределенном интеграле имеет вид:", a: ["&int;f'(x)dx = &int;f(&phi;(t))dt", "&int;f(x)dx = &int;f(&phi;(t))dt", "&int;f(x)dx = &int;f'(&phi;(t))&middot;&phi;'(t)dt", "&int;f(x)dx = &int;f(&phi;(t))&middot;&phi;'(t)dt"], c: 3 },
+            { q: "Формула интегрирования по частям имеет вид:", a: ["&int;udv = uv - &int;vdu", "&int;u&middot;vdv = &int;vdu", "&int;udu = &int;u&middot;vdv - &int;udv", "&int;udv = uv + &int;vdu"], c: 0 },
+            { q: "Интеграл &int;A/(x-a) dx равен:", a: ["A ln|x-a| + C", "ln|x+a| + C", "1/A ln|x-a| + C", "-1/A ln|x-a| + C"], c: 0 },
+            { q: "Интеграл &int;A/(x-a)<sup>k</sup> dx равен:", a: ["A(x+a)<sup>-k+1</sup>/(-k+1) + C", "-A(x+a)<sup>-k+1</sup>/(-k+1) + C", "1/A(x+a)<sup>-k+1</sup>/(-k+1) + C", "A(x-a)<sup>-k+1</sup>/(-k+1) + C"], c: 3 },
+            { q: "Непрерывная функция имеет:", a: ["только одну первообразную", "бесконечное множество первообразных", "две первообразных", "три первообразных"], c: 1 },
+            { q: "Две различные первообразные одной и той же функции:", a: ["равны между собой", "равны нулю", "отличаются на константу", "отличаются на некоторую функцию"], c: 2 },
+            { q: "К интегрируемым функциям относятся все:", a: ["постоянные функции", "непрерывные функции", "прерывные функции", "функции, равные нулю"], c: 1 },
+            { q: "Интеграл &int;<sub>a</sub><sup>a</sup> f(x)dx равен:", a: ["-1", "1", "0", "a"], c: 2 },
+            { q: "Формула Ньютона-Лейбница имеет вид:", a: ["&int;<sub>a</sub><sup>b</sup> f(x)dx = F(b) + F(a)", "&int;<sub>a</sub><sup>b</sup> f(x)dx = F(b) + C", "&int;<sub>a</sub><sup>b</sup> f(x)dx = F(b) - F(a)", "&int;<sub>a</sub><sup>b</sup> f(x)dx = F(a) - F(b)"], c: 2 },
+            { q: "В выражении &int; f(x)dx функция f(x) называется:", a: ["монотонным выражением", "интегральной суммой", "подынтегральной функцией", "функцией, равной нулю"], c: 2 },
+            { q: "Площадь фигуры, ограниченной кривыми, можно найти по формуле:", a: ["S = &int; (f<sub>1</sub>(x) + f<sub>2</sub>(x))dx", "S = &int; (f<sub>1</sub>(x) - f<sub>2</sub>(x))dx", "S = &int; (f<sub>1</sub>(x) &middot; f<sub>2</sub>(x))dx", "S = &int; (f<sub>1</sub>(x) - f<sub>2</sub>(x))dx"], c: 1 },
+            { q: "Формула интегрирования по частям в определенном интеграле имеет вид:", a: ["&int; u&middot;vdv = &int; vdu", "&int; udv = uv|<sub>a</sub><sup>b</sup> - &int; vdu", "&int; udu = uvdv - &int; vdu", "&int; udv = uv|<sub>b</sub><sup>a</sup> + &int; vdu"], c: 1 },
+            { q: "Длина дуги плоской кривой вычисляется по формуле:", a: ["l = &int; &radic;(1 - (f'(x))<sup>2</sup>) dx", "l = &int; &radic;(1 + (f(x))<sup>2</sup>) dx", "l = &int; &radic;(1 + (f'(x))<sup>2</sup>) dx", "l = &int; &radic;(1 + f'(x)dx)"], c: 2 },
+            { q: "Частной производной по x от функции z=f(x,y) называется:", a: ["lim &Delta;z/&Delta;x", "lim<sub>&Delta;x&rarr;0</sub> (f(x+&Delta;x, y) - f(x, y)) / &Delta;x", "lim (f(x, y+&Delta;y) - f(x,y)) / &Delta;x", "lim (f(x,y) - f(x+&Delta;x, y)) / &Delta;x"], c: 1 }
+        ];
 
-	<section id="about">	
-		<a name="abt"></a>
-		<div class="container">
-			<div class="title2">
-		
-				<h2> Народы разговаривающие на татарском языке</h2>
-			</div>
+        const practiceDB = [
+            { q: "Предел последовательности lim<sub>n&rarr;&infin;</sub> (3n<sup>2</sup> + 3n - 9) / (-2 + n - 4n<sup>2</sup>) равен:", a: ["-1", "-0,75", "-0,5", "-0,25"], c: 1 },
+            { q: "Предел последовательности lim<sub>n&rarr;&infin;</sub> (4n<sup>3</sup> / (8 - 5n<sup>3</sup>) + 5<sup>1/n</sup>) равен:", a: ["1", "0,6", "0,4", "0,2"], c: 3 },
+            { q: "Предел функции lim<sub>x&rarr;&infin;</sub> (5x - x<sup>2</sup> - 4) / (x<sup>2</sup> - 2x - 8) равен:", a: ["-1", "5", "0,5", "-2,5"], c: 0 },
+            { q: "Предел функции lim<sub>x&rarr;&infin;</sub> (3x<sup>3</sup> / (1 - x<sup>3</sup>) + 4<sup>1/x</sup>) равен:", a: ["-1", "1", "-2", "2"], c: 2 },
+            { q: "Предел функции lim<sub>x&rarr;7</sub> (&radic;(2+x) - 3) / (x - 7) равен:", a: ["&infin;", "0", "1/6", "1/3"], c: 2 },
+            { q: "Предел функции lim<sub>x&rarr;0</sub> x &middot; ctg(4x) равен:", a: ["0,25", "0,75", "0,5", "1"], c: 0 },
+            { q: "Предел функции lim<sub>x&rarr;0</sub> (e<sup>x</sup> - 1) / sin(x) равен:", a: ["2", "-1", "0,5", "1"], c: 3 },
+            { q: "Предел функции lim<sub>x&rarr;&infin;</sub> ((2x+3) / (2x-1))<sup>(x+2)/3</sup> равен:", a: ["e<sup>2</sup>", "e<sup>1/3</sup>", "e<sup>2/3</sup>", "e"], c: 2 },
+            { q: "Наклонная асимптота кривой y = x<sup>3</sup> / (2(x+1)<sup>2</sup>) имеет вид:", a: ["y = x + 1", "y = 0,5x - 1", "y = x - 1", "y = -0,5x + 1"], c: 1 },
+            { q: "Уравнение касательной к кривой y = x<sup>2</sup> - 5x + 4 в точке с абсциссой x<sub>0</sub> = -1 имеет вид:", a: ["y = -7x + 3", "y = -5x + 2", "y = 3x + 4", "y = 9x - 1"], c: 0 },
+            { q: "Вычислить производную от функции y = x<sup>2</sup> sin x:", a: ["y' = 2x sin x + x<sup>2</sup> cos x", "y' = 2x sin x - x<sup>2</sup> cos x", "y' = 3x<sup>2</sup> cos x", "y' = 2x sin x"], c: 0 },
+            { q: "Вычислить производную от функции y = x<sup>5</sup> e<sup>x</sup>:", a: ["y' = 5x<sup>4</sup> e<sup>x</sup> + x<sup>5</sup> x e<sup>x-1</sup>", "y' = 5x<sup>4</sup> e<sup>x</sup>", "y' = 5x<sup>4</sup> e<sup>x</sup> - x<sup>5</sup> e<sup>x</sup>", "y' = 5x<sup>4</sup> e<sup>x</sup> + x<sup>5</sup> e<sup>x</sup>"], c: 3 },
+            { q: "Вычислить производную от функции y = x<sup>3</sup> cos x:", a: ["y' = 4x<sup>3</sup> cos x", "y' = 3x<sup>2</sup> cos x - x<sup>3</sup> sin x", "y' = -3x<sup>2</sup> sin x", "y' = 3x<sup>2</sup> cos x + x<sup>3</sup> sin x"], c: 1 },
+            { q: "Вычислить производную от функции y = x<sup>7</sup> e<sup>x</sup>:", a: ["y' = 7x<sup>6</sup> e<sup>x</sup>", "y' = 7x<sup>6</sup> e<sup>x</sup> + x<sup>7</sup> x e<sup>x-1</sup>", "y' = 7x<sup>6</sup> e<sup>x</sup> + x<sup>7</sup> e<sup>x</sup>", "y' = x<sup>7</sup> e<sup>x</sup>"], c: 2 },
+            { q: "Вычислить производную от функции y = x<sup>6</sup> sin x:", a: ["y' = 6x<sup>5</sup> cos x + x<sup>6</sup> sin x", "y' = 6x<sup>5</sup> sin x + x<sup>6</sup> cos x", "y' = -6x<sup>5</sup> sin x", "y' = 6x<sup>5</sup> cos x"], c: 1 },
+            { q: "Вычислить производную от функции y = x / (sin x + cos x):", a: ["y' = (x cos x) / (sin x + cos x)<sup>2</sup>", "y' = (sin x + cos x - x(cos x - sin x)) / (sin x + cos x)<sup>2</sup>", "y' = (x cos x - (x-1)sin x) / (sin x + cos x)<sup>2</sup>", "y' = (x sin x + x cos x) / (1 + sin 2x)"], c: 1 },
+            { q: "Вычислить производную от функции y = x sin x + cos x:", a: ["y' = cos x - sin x", "y' = cos x + x sin x", "y' = x cos x", "y' = x sin x"], c: 2 },
+            { q: "Производная функции y = 1/18 sin<sup>6</sup> 3x имеет вид:", a: ["y' = cos 3x sin<sup>5</sup> 3x", "y' = 1/3 sin<sup>5</sup> 3x", "y' = 1/9 x cos<sup>5</sup> 3x", "y' = 1/3 sin<sup>5</sup> 3x cos 3x"], c: 0 },
+            { q: "Производная функции y = 5<sup>x&sup2;+1</sup> имеет вид:", a: ["y' = 2x &middot; 5<sup>x&sup2;+1</sup>", "y' = (x<sup>2</sup>+1) &middot; 5<sup>x&sup2;</sup>", "y' = 2x &middot; 5<sup>x&sup2;+1</sup> ln 5", "y' = 2x &middot; 5<sup>x&sup2;</sup>"], c: 2 },
+            { q: "Производная функции y = x + arctg x имеет вид:", a: ["y' = 1 - 1/(1+x<sup>2</sup>)", "y' = (2+x<sup>2</sup>)/(1+x<sup>2</sup>)", "y' = 1/(1+x<sup>2</sup>)", "y' = 1 + 1/&radic;(1+x<sup>2</sup>)"], c: 1 },
+            { q: "Применима ли теорема Ролля для f(x) = 9 - x<sup>2</sup> на отрезке [-2, 2]? Найти точку c:", a: ["Неприменима", "c = 3", "c = -3", "c = 0"], c: 3 },
+            { q: "Применима ли теорема Лагранжа для f(x) = x<sup>2</sup> - 2x - 3 на отрезке [-2, 4]? Найти c:", a: ["c = 3", "c = 1,5", "Неприменима", "c = 1"], c: 3 },
+            { q: "Вычислить предел lim<sub>x&rarr;0</sub> (ln sin 2x) / (ln sin x) с помощью правила Лопиталя:", a: ["1", "-1", "2", "4"], c: 0 },
+            { q: "Функция y = x<sup>2</sup> e<sup>-x</sup> возрастает на:", a: ["[-&infin;, 0] &cup; [2, +&infin;]", "[-&infin;, -2] &cup; [2, +&infin;]", "[-2, 2]", "[0, 2]"], c: 3 },
+            { q: "Функция y = 2x<sup>2</sup> - ln x убывает на:", a: ["[-&infin;, -1] &cup; [0, 1]", "[-1/2, 0] &cup; [2, +&infin;]", "[-&infin;, -2] &cup; [2, +&infin;]", "(0, 1/2]"], c: 3 },
+            { q: "Наибольшее значение функции y = 2x - 2 ln x на отрезке [1/e; e] равно:", a: ["2", "2/e + 2", "2e - 2", "4"], c: 2 },
+            { q: "Предел функции lim<sub>x&rarr;0, y&rarr;0</sub> sin(xy) / 5y равен:", a: ["0", "1", "5", "0,2"], c: 0 },
+            { q: "Предел функции lim<sub>x&rarr;2, y&rarr;1</sub> (x<sup>2</sup> - 4xy + 4y<sup>2</sup>) / (x - 2y) равен:", a: ["Не существует", "1", "0", "-1"], c: 2 },
+            { q: "Предел функции lim<sub>x&rarr;&infin;, y&rarr;&infin;</sub> ((xy-2) / (xy+3))<sup>5xy-1</sup> равен:", a: ["e<sup>-20</sup>", "e<sup>5</sup>", "e<sup>-25</sup>", "e<sup>-30</sup>"], c: 2 },
+            { q: "Частная производная функции z = (sin y)<sup>x</sup> по x равна:", a: ["z'<sub>x</sub> = (sin y)<sup>x</sup> ln(sin y)", "z'<sub>x</sub> = x(sin y)<sup>x-1</sup>", "z'<sub>x</sub> = (sin y)<sup>x</sup> cos y", "z'<sub>x</sub> = x(sin y)<sup>x-1</sup> ln(sin y)"], c: 0 },
+            { q: "Частная производная функции z = (sin y)<sup>x</sup> по y равна:", a: ["z'<sub>y</sub> = (sin y)<sup>x</sup> ln(sin y)", "z'<sub>y</sub> = x(sin y)<sup>x-1</sup>", "z'<sub>y</sub> = x(sin y)<sup>x-1</sup> cos y", "z'<sub>y</sub> = (sin y)<sup>x</sup> cos y"], c: 2 },
+            { q: "Найти grad z (где z = x ln(x+y)) в заданной точке M(-1; 2):", a: ["grad z = (1, 1)", "grad z = (-1, -1)", "grad z = (2, 1)", "grad z = (-1, 1)"], c: 1 },
+            { q: "Найти область определения функции y = &radic;(3x + 9):", a: ["[3; &infin;)", "(-&infin;; 3]", "[-3; &infin;)", "[-3; 3]"], c: 2 },
+            { q: "Найти область определения функции y = ln(8 - 2x):", a: ["(4; &infin;)", "(-&infin;; 2]", "[-4; 4]", "(-&infin;; 4)"], c: 3 },
+            { q: "Вычислить неопределенный интеграл &int; sin(3 - 7x) dx:", a: ["1/7 cos(3 - 7x) + C", "-7 cos(3 - 7x) + C", "-1/7 cos(3 - 7x) + C", "7 cos(3 - 7x) + C"], c: 0 },
+            { q: "Вычислить определенный интеграл &int;<sub>1</sub><sup>3</sup> (2x + 1) dx:", a: ["10", "-1/4", "7", "1/4"], c: 0 }
+        ];
 
-			<div class="number clearfix">
-    <section>
-				<div class="number_item">	
-				    <h3> Башкиры</h3>
-					<p>Башки́ры  — тюркский народ, коренное население Башкортостана и одноимённой исторической области. Численность в мире около 2 миллионов человек. В Российской Федерации по данным Всероссийской переписи населения 2010 года проживало 1 584 554 башкира, а по данным переписи населения 2020 года численность башкир составила 1 571 879 человек.</p>
-				</div>
-			    <div class="number_item">
-				<div class="zoom">
-				<img src="images/image3.png" alt="">
-				</div>
-			    </div>
-			    <div class="number_item">
-				&nbsp;
-			    </div>
-    </section>
+        let currentQuestions = [];
 
-    <section id="about">
-				<div class="number_item">
-				&nbsp;
-			    </div>
-			    <div class="number_item">
-					<div class="zoom">
-				<img src="images/23.jpg" alt="">
-					</div>
-			    </div>
-			    <div class="number_item">	
-				    <h3>Чуваши</h3>
-			        <p> Чува́ши — тюркский народ численностью в мире — 1 111 600 (2023), из них в России — 1 067 139. В Чувашской Республике проживает больше половины всех чувашей, живущих в России, остальные проживают практически во всех регионах России.</p>
-				</div>
-	</section>
+        function getRandomQuestions(array, num) {
+            const shuffled = [...array].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, Math.min(num, array.length));
+        }
 
-	<section id="about">
-				<div class="number_item">	
-				    <h3>Удмурты</h3>
-					<p>Удму́рты — финно-угорский народ, в основном проживающий в Удмуртской Республике и соседних регионах России. Говорят на удмуртском и русском языках. 58,7 % удмуртов назвали родным удмуртский язык, который относится к пермской группе финно-угорской семьи.</p>
-				</div>
-				<div class="number_item">
-					<div class="zoom">
-					<img src="images/image6.png" alt="">
-					</div>
-					</div>
-			    <div class="number_item">
-				<img src="images/image5.png" alt="">
-			    </div>
-			    <div class="number_item">
-				&nbsp;
-			    </div>
-	</section>		    
+        function startQuiz(mode) {
+            document.getElementById('menu').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            const titleEl = document.getElementById('quiz-title');
 
-	
+            if (mode === 'theory') {
+                titleEl.textContent = 'Теоретическая часть (20 вопросов)';
+                currentQuestions = getRandomQuestions(theoryDB, 20);
+            } else if (mode === 'practice') {
+                titleEl.textContent = 'Практическая часть (20 вопросов)';
+                currentQuestions = getRandomQuestions(practiceDB, 20);
+            } else {
+                titleEl.textContent = 'Комплексный тест (40 вопросов)';
+                const theoryPart = getRandomQuestions(theoryDB, 20);
+                const practicePart = getRandomQuestions(practiceDB, 20);
+                currentQuestions = [...theoryPart, ...practicePart].sort(() => 0.5 - Math.random());
+            }
+            renderQuestions();
+        }
 
-            </div>
-		</div>
-	</section>
-	
+        function renderQuestions() {
+            const container = document.getElementById('questions-area');
+            container.innerHTML = '';
+            currentQuestions.forEach((q, qIndex) => {
+                const block = document.createElement('div');
+                block.className = 'question-block';
+                block.id = `q-block-${qIndex}`;
 
+                const title = document.createElement('div');
+                title.className = 'question-title';
+                title.innerHTML = `<strong>Вопрос ${qIndex + 1}:</strong> <span class="math">${q.q}</span>`;
+                block.appendChild(title);
 
-	<footer id="footer">		
-		   <p>Источники</p>
-		   <p><a href="https://ru.wikipedia.org/wiki/Татарский_язык">Википедия</a></p>
-		   
+                q.a.forEach((optText, optIndex) => {
+                    const label = document.createElement('label');
+                    label.className = 'option';
+                    
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question-${qIndex}`;
+                    radio.value = optIndex;
 
+                    label.appendChild(radio);
+                    const span = document.createElement('span');
+                    span.className = 'math';
+                    span.innerHTML = optText;
+                    label.appendChild(span);
+                    block.appendChild(label);
+                });
+                container.appendChild(block);
+            });
+            window.scrollTo(0, 0);
+        }
 
-	</footer>
+        function checkAnswers() {
+            let score = 0;
+            currentQuestions.forEach((q, qIndex) => {
+                const block = document.getElementById(`q-block-${qIndex}`);
+                const selected = document.querySelector(`input[name="question-${qIndex}"]:checked`);
+                const labels = block.querySelectorAll('label');
+                
+                // Подсвечиваем правильный ответ
+                labels[q.c].classList.add('correct');
 
-	<!--<div id="button-up">
-        <i class="fa fa-chevron-up"></i>	
-    </div>-->
-  
+                if (selected) {
+                    const selectedVal = parseInt(selected.value);
+                    if (selectedVal === q.c) {
+                        score++;
+                    } else {
+                        labels[selectedVal].classList.add('incorrect');
+                    }
+                }
+            });
+
+            document.getElementById('submit-btn').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            
+            const percentage = Math.round((score / currentQuestions.length) * 100);
+            document.getElementById('score-text').textContent = `${score} из ${currentQuestions.length} (${percentage}%)`;
+            
+            // Прокручиваем вниз к результату
+            setTimeout(() => {
+                document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    </script>
 </body>
 </html>
